@@ -43,7 +43,7 @@ func (this *Tree) GetAllParents(pid int) []*Node{
 			parents = append(parents,this.GetAllParents(this.List[k].Pid)...)
 		}
 	}
-	this.Parents = UniqueNodes(parents)
+	this.Parents = this.UniqueNodes(parents)
 	return parents
 }
 
@@ -52,13 +52,11 @@ func (this *Tree) GetAllChildren(id int) ([]*Node){
 	children := make([]*Node,0)
 	for k,_ := range this.List {
 		if id == this.List[k].Pid{
-			if _,ok := this.Children[this.List[k].Id];!ok{
-				children = append(children,this.List[k])
-				children = append(children,this.GetAllChildren(this.List[k].Id)...)
-			}
+			children = append(children,this.List[k])
+			children = append(children,this.GetAllChildren(this.List[k].Id)...)
 		}
 	}
-	this.Children = UniqueNodes(children)
+	this.Children = this.UniqueNodes(children)
 	return children
 }
 
@@ -71,7 +69,7 @@ func (this *Tree) GetNode(id int) (*Node){
 }
 
 //nodes 节点排重
-func UniqueNodes( nodes []*Node ) map[int]Node {
+func (this *Tree)UniqueNodes( nodes []*Node ) map[int]Node {
 	newArr := make(map[int]Node,0)
 	for k,_ := range nodes {
 		node := nodes[k]
