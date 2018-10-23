@@ -2,7 +2,14 @@
 ## 1 支持构建树结构
 ## 2 查询所有父节点
 ## 3 查询所有子节点
-
+        
+            package main
+            
+            import (
+            	"encoding/json"
+            	"log"
+            	"github.com/VanJames/tree/lib"
+            )
         //原始数据格式 目前支持转成该种方式 [{"id":1,"name":"test","pid":0},{"id":2,"name":"test1","pid":1},{"id":3,"name":"test2","pid":2}]
         	menus := []byte(`[{"id":1,"name":"test","pid":0},{"id":2,"name":"test1","pid":1},{"id":3,"name":"test2","pid":2}]`)
         	var nodes []lib.Node
